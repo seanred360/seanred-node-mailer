@@ -35,9 +35,12 @@ router.post("/send", (req, res, next) => {
   const content = `name: ${name} \n email: ${email} \n message: ${message} `;
 
   const mail = {
-    from: name,
-    to: "seanredmon@seanred.io", // Change to email address that you want to receive messages on
-    subject: "New Message from Contact Form",
+    from: {
+      name: name,
+      address: process.env.USER,
+    },
+    to: process.env.USER, // Change to email address that you want to receive messages on
+    subject: "seanred.io: New Message from Contact Form",
     text: content,
   };
 
