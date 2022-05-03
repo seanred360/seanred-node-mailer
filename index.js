@@ -53,6 +53,22 @@ router.post("/send", (req, res, next) => {
       res.json({
         status: "success",
       });
+
+      transporter.sendMail(
+        {
+          from: "seanredmon@seanred.io",
+          to: email,
+          subject: "Thank you for contacting Sean Redmon",
+          text: `Thank you for contacting me! I will get back to you as soon as possible. \n\nForm details\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
+        },
+        function (error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("Message sent: " + info.response);
+          }
+        }
+      );
     }
   });
 });
